@@ -1,0 +1,49 @@
+
+{
+	"buildFiles" : 
+	[
+		"C:/Users/homer/Desktop/VideoStreaming/android-camera-socket-stream/CameraSource/app/CMakeLists.txt"
+	],
+	"cleanCommands" : 
+	[
+		"C:\\Users\\homer\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\homer\\Desktop\\VideoStreaming\\android-camera-socket-stream\\CameraSource\\app\\.externalNativeBuild\\cmake\\release\\x86_64 --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"lib_opencv-Release-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "lib_opencv",
+			"buildType" : "release",
+			"output" : "C:/Users/homer/Desktop/VideoStreaming/android-camera-socket-stream/CameraSource/app/src/main/jni/x86_64/libopencv_java.so",
+			"toolchain" : "4081909545"
+		},
+		"native-lib-Release-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "native-lib",
+			"buildCommand" : "C:\\Users\\homer\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\homer\\Desktop\\VideoStreaming\\android-camera-socket-stream\\CameraSource\\app\\.externalNativeBuild\\cmake\\release\\x86_64 --target native-lib",
+			"buildType" : "release",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/Users/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/Users/android-ndk-r16b/sysroot  -Dnative_lib_EXPORTS -IC:\\OpenCV-android-sdk\\sdk\\native\\jni\\include -I..\\..\\..\\..\\src\\main\\cpp\\include -isystem C:\\Users\\android-ndk-r16b\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\android-ndk-r16b\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86_64\\include -isystem C:\\Users\\android-ndk-r16b\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security   -std=gnu++11 -O2 -DNDEBUG  -fPIC    -c ",
+					"src" : "C:/Users/homer/Desktop/VideoStreaming/android-camera-socket-stream/CameraSource/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "C:/Users/homer/Desktop/VideoStreaming/android-camera-socket-stream/CameraSource/app/.externalNativeBuild/cmake/release/x86_64"
+				}
+			],
+			"output" : "C:/Users/homer/Desktop/VideoStreaming/android-camera-socket-stream/CameraSource/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so",
+			"toolchain" : "4081909545"
+		}
+	},
+	"toolchains" : 
+	{
+		"4081909545" : 
+		{
+			"cCompilerExecutable" : "C:/Users/android-ndk-r16b/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/Users/android-ndk-r16b/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}
