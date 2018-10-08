@@ -196,7 +196,7 @@ Project_SOURCE_DIR:STATIC=C:/Users/homer/Desktop/VideoStreaming/android-camera-s
 log-lib:FILEPATH=C:/Users/android-ndk-r16b/platforms/android-15/arch-arm/usr/lib/liblog.so
 
 //Dependencies for the target
-native-lib_LIB_DEPENDS:STATIC=general;C:/Users/android-ndk-r16b/platforms/android-15/arch-arm/usr/lib/liblog.so;general;${log-lib};general;lib_opencv;
+native-lib_LIB_DEPENDS:STATIC=general;-ljnigraphics;general;C:/Users/android-ndk-r16b/platforms/android-15/arch-arm/usr/lib/liblog.so;general;${log-lib};general;lib_opencv;
 
 
 ########################

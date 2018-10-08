@@ -1,5 +1,6 @@
 package com.example.alvin.camerasource;
 
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
+import org.bytedeco.javacv.Frame;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
@@ -35,15 +37,10 @@ public class MainActivity extends AppCompatActivity {
         else
             Log.d(TAG,"OpenCV No working");
     }
-    static {
-        System.loadLibrary("native-lib");
-    }
-    public native static String stringFromJNI();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        System.out.println(stringFromJNI());
+        Assetbridge.unpack(this);
         setContentView(R.layout.activity_main);
         serverStatus = (TextView) findViewById(R.id.textView);
         SERVERIP = getLocalIpAddress();
@@ -91,5 +88,10 @@ public class MainActivity extends AppCompatActivity {
         }
         return c;
     }
+
+
+
+
+
 
 }

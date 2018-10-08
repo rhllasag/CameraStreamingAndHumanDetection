@@ -1,7 +1,19 @@
 # ninja log v5
-5	7845	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	cc01e87c7e92a557
-7847	8400	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	bf6e9a2ce7b4fb9b
-4	472	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	cc01e87c7e92a557
-473	619	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	bf6e9a2ce7b4fb9b
-31	11086	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
-11089	12148	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+1	1962	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+1966	2423	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+7	271	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+272	713	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+1	2147	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+2147	2360	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+7	135	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+135	635	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+3	4358	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+4358	4840	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+41	4845	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+4845	5286	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+8	2078	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+2078	2538	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	276d7de5965c0dfa
+6	1361	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+1361	1713	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	9a8454c142984fd5
+30	7321	0	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	13d0f42bd26b1b0c
+7321	9257	0	../../../../build/intermediates/cmake/debug/obj/x86/libnative-lib.so	9a8454c142984fd5
