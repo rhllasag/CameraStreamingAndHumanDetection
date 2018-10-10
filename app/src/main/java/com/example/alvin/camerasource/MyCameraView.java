@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
@@ -12,6 +13,9 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.TextureView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacv.AndroidFrameConverter;
@@ -32,8 +36,6 @@ import java.nio.ByteBuffer;
  */
 public class MyCameraView  extends SurfaceView implements SurfaceHolder.Callback,Camera.PreviewCallback{
     private final String LOG_TAG = "MyCameraView";
-
-
     private SurfaceHolder mHolder;
     private Camera mCamera;
     private int width;
@@ -46,6 +48,7 @@ public class MyCameraView  extends SurfaceView implements SurfaceHolder.Callback
      */
     private byte[] videoSource;
     private Bitmap imageA;
+    private ImageView imViewA;
     final boolean LOG_FRAME_RATE = true;
     private boolean bProcessing = false;
     private Handler mHandler=new Handler(Looper.getMainLooper());
@@ -65,9 +68,10 @@ public class MyCameraView  extends SurfaceView implements SurfaceHolder.Callback
     public MyCameraView(Context context,Camera camera){
         super(context);
         con=context;
-        computerVision(null, null);
+        //computerVision(null, null);
         mCamera=camera;
         mHolder=getHolder();
+        imViewA=(ImageView)findViewById(R.id.imageViewA);
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
@@ -88,9 +92,17 @@ public class MyCameraView  extends SurfaceView implements SurfaceHolder.Callback
      * @param holder
      */
     public void surfaceDestroyed(SurfaceHolder holder) {
-        mCamera.setPreviewCallback(null);
-        mCamera.release();
-        mCamera=null;
+
+        if (mCamera != null){
+            mCamera.setPreviewCallback(null);
+            mCamera.stopPreview();
+            mCamera.release();
+
+            mCamera = null;
+            videoSource = null;
+
+            imageA.recycle();; imageA = null;
+        }
     }
 
 
@@ -107,18 +119,55 @@ public class MyCameraView  extends SurfaceView implements SurfaceHolder.Callback
         } catch (Exception e){
             e.printStackTrace();
         }
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+
+        for (int camNo = 0; camNo < Camera.getNumberOfCameras(); camNo++) {
+            Camera.CameraInfo camInfo = new Camera.CameraInfo();
+            Camera.getCameraInfo(camNo, camInfo);
+
+            if (camInfo.facing==(Camera.CameraInfo.CAMERA_FACING_FRONT)) {
+                mCamera = Camera.open(camNo);
+            }
+        }
+        if (mCamera == null) { /// Xperia LT15i has no front-facing camera, defaults to back camera
+            mCamera = Camera.open();
+        }
         try{
+            mCamera.setPreviewCallbackWithBuffer(this);
             //Configration Camera Parameter(full-size)
+            PixelFormat pixelFormat = new PixelFormat();
+            PixelFormat.getPixelFormatInfo(mCamera.getParameters().getPreviewFormat(), pixelFormat);
+            int sourceSize = 320 * 240* pixelFormat.bitsPerPixel / 8;
+
             Camera.Parameters parameters = mCamera.getParameters();
             parameters.setPreviewSize(320,240);
             this.width=parameters.getPreviewSize().width;
             this.height=parameters.getPreviewSize().height;
-            parameters.setPreviewFormat(ImageFormat.NV21);
+            parameters.setPreviewFormat(PixelFormat.YCbCr_420_SP);
             mCamera.setParameters(parameters);
-           // mCamera.setDisplayOrientation(90);
+
+
+            int imageFormat = parameters.getPreviewFormat();
+
+            if (imageFormat == ImageFormat.NV21) {
+                System.out.println("IMAGE FORMAT NV21");
+            }
+            /// Video buffer and bitmaps
+            videoSource = new byte[sourceSize];
+            imageA = Bitmap.createBitmap(this.width, this.height, Bitmap.Config.ARGB_8888);
+            imViewA.setImageBitmap(imageA);
+
+            /// Queue video frame buffer and start camera preview
+            mCamera.addCallbackBuffer(videoSource);
+            mCamera.startPreview();
+
+            // mCamera.setDisplayOrientation(90);
             mCamera.setPreviewCallback(this);
             mCamera.startPreview();
+
         }catch(Exception e){
+            mCamera.release();
+            mCamera = null;
             e.printStackTrace();
         }
     }
@@ -146,7 +195,7 @@ public class MyCameraView  extends SurfaceView implements SurfaceHolder.Callback
                 mHandler.post(DoImageProcessing);
             }
         }
-       /* try{
+        /*try{
             //convert YuvImage(NV21) to JPEG Image data
             YuvImage yuvimage=new YuvImage(data,ImageFormat.NV21,this.width,this.height,null);
             System.out.println("WidthandHeight"+yuvimage.getHeight()+"::"+yuvimage.getWidth());
