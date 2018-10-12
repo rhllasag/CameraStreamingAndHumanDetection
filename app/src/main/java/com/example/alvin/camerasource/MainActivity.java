@@ -19,6 +19,7 @@ import org.bytedeco.javacv.Frame;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -31,10 +32,10 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     private Camera mCamera;
     public TextView serverStatus;
     public static String SERVERIP = "localhost";
-    public static final int SERVERPORT = 9191;
+    public static final int SERVERPORT = 8080;
     private Handler handler = new Handler();
     private static final String TAG = "MainActivity";
-
+    public ByteArrayOutputStream mFrames;
     static {
         if(OpenCVLoader.initDebug()){
             Log.d(TAG,"OpenCV ok");
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
     private Bitmap imageA;
     final boolean LOG_FRAME_RATE = true;
     private boolean bProcessing = false;
-    private Handler mHandler=new Handler(Looper.getMainLooper());
+    //private Handler mHandler=new Handler(Looper.getMainLooper());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,16 +128,21 @@ public class MainActivity extends AppCompatActivity implements TextureView.Surfa
         if (mCamera != null){
             if(!bProcessing) {
                 videoSource = data;
-                mHandler.post(DoImageProcessing);
+                handler.post(DoImageProcessing);
             }
         }
     }
+
+
     private Runnable DoImageProcessing = new Runnable() {
         public void run() {
             bProcessing = true;
-            opticalComputerVision(imageA, videoSource);
+            computerVision(imageA, videoSource);
             imViewA.invalidate();
             mCamera.addCallbackBuffer(videoSource);
+            ByteArrayOutputStream baos=new ByteArrayOutputStream();
+            imageA.compress(Bitmap.CompressFormat.JPEG,100,baos);
+            mFrames=baos;
             bProcessing = false;
         }
     };

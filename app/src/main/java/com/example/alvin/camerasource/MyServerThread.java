@@ -75,12 +75,12 @@ public class MyServerThread implements Runnable {
                         //服务器端向客户端发送数据
                         //dos.write(mPreview.mFrameBuffer.);
                         DataOutputStream dos = new DataOutputStream(os);
-                       /* System.out.println("====Size====="+mActivityInstance.mPreview.mFrameBuffer.size());
-                        dos.write(intToByteArray(mActivityInstance.mPreview.mFrameBuffer.size()));
+                        System.out.println("====Size====="+mActivityInstance.mFrames.size());
+                        dos.write(intToByteArray(mActivityInstance.mFrames.size()));
                         dos.flush();
-                        System.out.println(mActivityInstance.mPreview.mFrameBuffer.size());
-                        dos.write(mActivityInstance.mPreview.mFrameBuffer.toByteArray());
-                        //System.out.println("outlength"+mPreview.mFrameBuffer.length);*/
+                        System.out.println(mActivityInstance.mFrames.size());
+                        dos.write(mActivityInstance.mFrames.toByteArray());
+                        //System.out.println("outlength"+mFrames.length);
                         dos.flush();
                         Thread.sleep(1000/15);
                     }
